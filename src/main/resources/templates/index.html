@@ -12,7 +12,7 @@
     </div>
     <div>
         <form action="#" th:action="@{/index}" th:object="${quiz}" method="post">
-            <input type="text" th:field="*{name}" th:placeholder="Имя"/>
+            <input type="text" th:field="*{name}" th:placeholder="Название"/>
             <input type="text" th:field="*{text}" th:placeholder="Описание"/>
             <input type="text" th:field="*{tag}" th:placeholder="Тэг"/>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
@@ -27,6 +27,7 @@
         <b th:text="${quis.id}">1</b>
         <span th:text="${quis.name}">TestQuiz</span>
         <i th:text="${quis.tag}">Tag</i>
+        <strong th:text="|Author: ${quis.authorName}|">Author</strong>
         <form th:action="@{/index/delete}" method="post">
             <input type="hidden" th:name="id" th:value="${quis.id}" />
             <button type="submit">Delete</button>

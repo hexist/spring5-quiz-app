@@ -1,8 +1,10 @@
 package com.gusev.spring5quizapp.controller;
 
 import com.gusev.spring5quizapp.model.Quiz;
+import com.gusev.spring5quizapp.model.User;
 import com.gusev.spring5quizapp.repository.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +32,12 @@ public class MainController {
     }
 
     @PostMapping("/index")
-    public String add(@ModelAttribute Quiz quiz, Map<String, Object> model) {
-        Quiz newQuiz = new Quiz(quiz.getName(), quiz.getText(), quiz.getTag());
+    public String add(
+            @AuthenticationPrincipal User user,
+            @ModelAttribute Quiz quiz,
+            Map<String, Object> model
+    ) {
+        Quiz newQuiz = new Quiz(quiz.getName(), quiz.getText(), quiz.getTag(), user);
 
         quizRepository.save(newQuiz);
 
