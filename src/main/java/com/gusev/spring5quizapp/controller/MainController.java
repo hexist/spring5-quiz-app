@@ -14,16 +14,12 @@ public class MainController {
     @Autowired
     private QuizRepository quizRepository;
 
-    @GetMapping("/greeting")
-    public String greeting(
-            @RequestParam(name = "name", required = false, defaultValue = "Alex") String name,
-            Model model
-    ) {
-        model.addAttribute("name", name);
+    @GetMapping("/")
+    public String greeting(Model model) {
         return "greeting";
     }
 
-    @GetMapping
+    @GetMapping("/index")
     public String index(Map<String, Object> model) {
         Iterable<Quiz> quizzes = quizRepository.findAll();
 
@@ -33,7 +29,7 @@ public class MainController {
         return "index";
     }
 
-    @PostMapping
+    @PostMapping("/index")
     public String add(@ModelAttribute Quiz quiz, Map<String, Object> model) {
         Quiz newQuiz = new Quiz(quiz.getName(), quiz.getText(), quiz.getTag());
 
@@ -46,7 +42,7 @@ public class MainController {
         return "index";
     }
 
-    @PostMapping(value = "filter")
+    @PostMapping(value = "index/filter")
     public String filter(@RequestParam String filter, Map<String, Object> model) {
         Iterable<Quiz> quizzes;
 
@@ -62,7 +58,7 @@ public class MainController {
         return "index";
     }
 
-    @PostMapping("delete")
+    @PostMapping("index/delete")
     public String delete(@RequestParam Integer id, Map<String, Object> model) {
         quizRepository.deleteById(id);
         Iterable<Quiz> quizzes = quizRepository.findAll();
