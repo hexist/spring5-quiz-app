@@ -19,7 +19,7 @@
         </form>
     </div>
     <div th:if="${quizzes}">Список тестов:</div>
-    <form method="post" th:action="@{/index/filter}">
+    <form method="get" th:action="@{/index}">
         <input type="text" th:name="filter" th:placeholder="|Фильтр по тэгу|">
         <button type="submit">Искать</button>
     </form>
