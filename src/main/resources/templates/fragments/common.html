@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head (title)">
+    <meta charset="utf-8">
+    <title th:text="${title}">Заголовок</title>
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+    <!--crossorigin="anonymous"-->
+    <!--th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">-->
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"-->
+    <!--crossorigin="anonymous"-->
+    <!--th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>-->
+</head>
+<body>
+    <div th:fragment="logoutBtn">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:fragment="login (path, btnValue)" th:action="${path}" method="post">
+    <div><label> User Name : <input type="text" name="username"/> </label></div>
+    <div><label> Password: <input type="password" name="password"/> </label></div>
+    <div><input type="submit" class="btn btn-success" th:value="${btnValue}"/></div>
+</form>
+</body>
+</html>
