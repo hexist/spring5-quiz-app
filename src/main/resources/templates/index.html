@@ -3,6 +3,9 @@
 <head th:replace="fragments/common :: head ('Главная')"></head>
 <body>
     <div th:replace="fragments/common :: logoutBtn"></div>
+    <div th:if="${userIsAdmin}">
+        <span><a th:href="@{/user}" th:text="|User List|"></a></span>
+    </div>
     <div>
         <form action="#" th:action="@{/index}" th:object="${quiz}" method="post">
             <input type="text" th:field="*{name}" th:placeholder="Название"/>

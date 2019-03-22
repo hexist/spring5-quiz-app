@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head ('Редактирование пользователя')"></head>
+<body>
+<div th:replace="fragments/common :: logoutBtn"></div>
+<div>
+    User editor
+    <form th:action="@{/user}" th:method="post">
+        <input type="text" th:name="username" th:value="${user.username}"/>
+        <div th:each="role : ${roles}">
+            <input type="checkbox" th:name="${role}" th:checked="${#lists.contains(user.roles, role)}">
+            <label th:text="${role}"></label>
+        </div>
+        <input type="hidden" th:name="userId" th:value="${user.id}"/>
+        <button type="submit">Save</button>
+    </form>
+</div>
+</body>
+</html>

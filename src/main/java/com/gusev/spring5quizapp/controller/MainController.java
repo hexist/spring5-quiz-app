@@ -1,6 +1,7 @@
 package com.gusev.spring5quizapp.controller;
 
 import com.gusev.spring5quizapp.model.Quiz;
+import com.gusev.spring5quizapp.model.Role;
 import com.gusev.spring5quizapp.model.User;
 import com.gusev.spring5quizapp.repository.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,11 @@ public class MainController {
     }
 
     @GetMapping("/index")
-    public String index(@RequestParam(required = false, defaultValue = "") String filter,  Model model) {
+    public String index(
+            @AuthenticationPrincipal User user,
+            @RequestParam(required = false, defaultValue = "") String filter,
+            Model model
+    ) {
         Iterable<Quiz> quizzes;
 
         if (filter != null && !filter.isEmpty()) {
@@ -32,6 +37,7 @@ public class MainController {
             quizzes = quizRepository.findAll();
         }
 
+        model.addAttribute("userIsAdmin", user.getRoles().contains(Role.ADMIN));
         model.addAttribute("quiz", new Quiz());
         model.addAttribute("quizzes", quizzes);
 
