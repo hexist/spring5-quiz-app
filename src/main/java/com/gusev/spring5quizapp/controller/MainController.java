@@ -37,13 +37,19 @@ public class MainController {
         }
 
         model.addAttribute("isAdmin", user.isAdmin());
-        model.addAttribute("quiz", new Quiz());
         model.addAttribute("quizzes", quizzes);
 
         return "index";
     }
 
-    @PostMapping("/index")
+    @GetMapping("/quizAdd")
+    public String index(Model model) {
+        model.addAttribute("quiz", new Quiz());
+
+        return "quizAdd";
+    }
+
+    @PostMapping("/quizAdd")
     public String add(
             @AuthenticationPrincipal User user,
             @ModelAttribute Quiz quiz,
@@ -57,7 +63,7 @@ public class MainController {
 
         model.addAttribute("quizzes", quizzes);
 
-        return "index";
+        return "redirect:/index";
     }
 
     @PostMapping("index/delete")
@@ -68,6 +74,6 @@ public class MainController {
         model.addAttribute("quiz", new Quiz());
         model.addAttribute("quizzes", quizzes);
 
-        return "index";
+        return "redirect:/index";
     }
 }

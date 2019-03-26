@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head ('The Quiz')"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container mt-5">
+    <form action="#" th:action="@{/quizAdd}" th:object="${quiz}" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" th:placeholder="Name"/>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="tag">Tag</label>
+                <input type="text" class="form-control" id="tag" th:field="*{tag}" th:placeholder="Tag"/>
+            </div>
+        </div>
+        <div class="form-group p-0 col-md-8">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" th:field="*{text}" rows="3"
+                      th:placeholder="Description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-dark">Add</button>
+        <button type="reset" class="btn btn-outline-dark">Reset</button>
+    </form>
+</div>
+<footer th:replace="fragments/common :: footer"></footer>
+</body>
+</html>

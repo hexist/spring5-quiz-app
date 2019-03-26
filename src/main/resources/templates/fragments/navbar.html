@@ -1,5 +1,5 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light pl-5">
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark pl-5">
     <a class="navbar-brand" href="/">Quiz</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +18,8 @@
     </div>
     <div class="navbar-text" sec:authorize="isAuthenticated()">
         <form th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-dark">Logout <span class="badge badge-light" sec:authentication="principal.username"/></button>
+            <b class="mr-2" sec:authentication="principal.username"></b>
+            <button type="submit" class="btn btn-outline-light" th:text="|Sign out|"></button>
         </form>
     </div>
 </nav>
