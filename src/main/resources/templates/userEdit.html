@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/common :: head ('Редактирование пользователя')"></head>
 <body>
-<div th:replace="fragments/common :: logoutBtn"></div>
-<div>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container mt-5">
     User editor
     <form th:action="@{/user}" th:method="post">
         <input type="text" th:name="username" th:value="${user.username}"/>
@@ -15,5 +15,6 @@
         <button type="submit">Save</button>
     </form>
 </div>
+<footer th:replace="fragments/common :: footer"></footer>
 </body>
 </html>

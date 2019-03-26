@@ -1,7 +1,6 @@
 package com.gusev.spring5quizapp.controller;
 
 import com.gusev.spring5quizapp.model.Quiz;
-import com.gusev.spring5quizapp.model.Role;
 import com.gusev.spring5quizapp.model.User;
 import com.gusev.spring5quizapp.repository.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ public class MainController {
             quizzes = quizRepository.findAll();
         }
 
-        model.addAttribute("userIsAdmin", user.getRoles().contains(Role.ADMIN));
+        model.addAttribute("isAdmin", user.isAdmin());
         model.addAttribute("quiz", new Quiz());
         model.addAttribute("quizzes", quizzes);
 

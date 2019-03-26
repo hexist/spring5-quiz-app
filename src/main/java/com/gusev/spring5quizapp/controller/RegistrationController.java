@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -18,15 +17,15 @@ public class RegistrationController {
     private UserRepository userRepository;
 
     @GetMapping("/registration")
-    public String registration(){
+    public String registration() {
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Map<String, Object> model){
+    public String addUser(User user, Map<String, Object> model) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
-        if(userFromDB != null) {
+        if (userFromDB != null) {
             model.put("message", "User already exists!");
             return "registration";
         }

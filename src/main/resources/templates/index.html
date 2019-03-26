@@ -2,16 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/common :: head ('Главная')"></head>
 <body>
-    <div th:replace="fragments/common :: logoutBtn"></div>
-    <div th:if="${userIsAdmin}">
-        <span><a th:href="@{/user}" th:text="|User List|"></a></span>
-    </div>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container mt-5">
     <div>
         <form action="#" th:action="@{/index}" th:object="${quiz}" method="post">
             <input type="text" th:field="*{name}" th:placeholder="Название"/>
             <input type="text" th:field="*{text}" th:placeholder="Описание"/>
             <input type="text" th:field="*{tag}" th:placeholder="Тэг"/>
-            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+            <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
         </form>
     </div>
     <div th:if="${quizzes}">Список тестов:</div>
@@ -25,9 +23,11 @@
         <i th:text="${quis.tag}">Tag</i>
         <strong th:text="|Author: ${quis.authorName}|">Author</strong>
         <form th:action="@{/index/delete}" method="post">
-            <input type="hidden" th:name="id" th:value="${quis.id}" />
+            <input type="hidden" th:name="id" th:value="${quis.id}"/>
             <button type="submit">Delete</button>
         </form>
     </div>
+</div>
+<footer th:replace="fragments/common :: footer"></footer>
 </body>
 </html>

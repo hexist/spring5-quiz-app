@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Вход</title>
-</head>
+<head th:replace="fragments/common :: head ('Вход')"></head>
 <body>
-Sign In
-<div th:replace="fragments/login :: login (path = @{/login}, btnValue = 'Sign In')"></div>
-<a th:href="@{/registration}">Sign Up</a>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container mt-5">
+    <div class th:replace="fragments/login :: login (path = @{/login}, btnValue = 'Sign In')"></div>
+</div>
+<footer th:replace="fragments/common :: footer"></footer>
 </body>
 </html>

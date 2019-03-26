@@ -3,12 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+
 </head>
 <body>
-<form th:fragment="login (path, btnValue)" th:action="${path}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" class="btn btn-success" th:value="${btnValue}"/></div>
-</form>
+<div class="container text-center">
+    <form class="form-signin" th:fragment="login (path, btnValue)" th:action="${path}" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Please <span th:text="${btnValue}"></span></h1>
+        <label for="username" class="sr-only">Email address</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="${btnValue}"></button>
+        <h6 class="text-center">
+            <a class="badge badge-secondary" th:if="${btnValue}=='Sign Up'" th:href="@{/login}">Sign In</a>
+        </h6>
+        <h6 class="text-center">
+            <a class="badge badge-secondary"th:if="${btnValue}=='Sign In'" th:href="@{/registration}">Sign Up</a>
+        </h6>
+    </form>
+</div>
 </body>
 </html>

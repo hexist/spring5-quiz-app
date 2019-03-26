@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Greeting</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
+<head th:replace="fragments/common :: head ('Greeting')"></head>
 <body>
-<p th:text="'Hello, user!'" />
-<a th:href="@{/index}">Index page</a>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container pl-auto mt-5">
+    <p th:text="'Hello, user!'"/>
+    <a th:href="@{/index}">Index page</a>
+</div>
+<footer th:replace="fragments/common :: footer"></footer>
 </body>
 </html>
