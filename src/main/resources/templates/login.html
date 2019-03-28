@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/common :: head ('Вход')"></head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <div th:if="${message}!=null" th:text="${message}"></div>
 <div class="container mt-5">
-    <div class
+    <div class sec:authorize="!isAuthenticated()"
          th:replace="fragments/login :: login (path = @{/login}, btnValue = 'Sign In', isRegisterForm = false)"></div>
 </div>
 <footer th:replace="fragments/common :: footer"></footer>
