@@ -8,23 +8,32 @@
 </head>
 <body>
 <div class="container text-center">
-    <form class="form-signin" th:fragment="login (path, btnValue)" th:action="${path}" method="post">
+    <form class="form-signin" th:fragment="login (path, btnValue, isRegisterForm)" th:action="${path}" method="post">
         <h1 class="h3 mb-3 font-weight-normal">Please <span th:text="${btnValue}"></span></h1>
-        <label for="username" class="sr-only">Email address</label>
-        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+        <div th:if="${isRegisterForm}">
+            <label for="email" class="sr-only">Email</label>
+            <input type="email" id="email" class="form-control" name="email" placeholder="Email" required autofocus>
+        </div>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" th:classappend="${isRegisterForm} ? 'rounded-0'" placeholder="Username" required autofocus>
         <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-        <div class="checkbox mb-3">
+        <input type="password" id="password" name="password" class="form-control" th:classappend="${isRegisterForm} ? 'rounded-0'" placeholder="Password" required>
+        <div th:if="${isRegisterForm}">
+            <label for="confirmPassword" class="sr-only">Confirm password</label>
+            <input type="password" id="confirmPassword" class="form-control mb-3 mt-n1" name="confirmPassword"
+                   placeholder="Confirm Password" required>
+        </div>
+        <div th:unless="${isRegisterForm}" class="checkbox mb-3">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
         <button class="btn btn-lg btn-dark btn-block" type="submit" th:text="${btnValue}"></button>
         <h6 class="text-center">
-            <a class="badge badge-secondary" th:if="${btnValue}=='Sign Up'" th:href="@{/login}">Sign In</a>
+            <a class="badge badge-secondary" th:if="${isRegisterForm}" th:href="@{/login}">Sign In</a>
         </h6>
         <h6 class="text-center">
-            <a class="badge badge-secondary"th:if="${btnValue}=='Sign In'" th:href="@{/registration}">Sign Up</a>
+            <a class="badge badge-secondary" th:unless="${isRegisterForm}" th:href="@{/registration}">Sign Up</a>
         </h6>
     </form>
 </div>

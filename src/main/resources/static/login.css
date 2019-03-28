@@ -6,6 +6,7 @@
 }
 .form-signin .checkbox {
     font-weight: 400;
+    margin-top: 10px;
 }
 .form-signin .form-control {
     position: relative;
@@ -17,13 +18,12 @@
 .form-signin .form-control:focus {
     z-index: 2;
 }
-.form-signin input[type="email"] {
+.form-signin input[id="username"], input[id="email"]{
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
+.form-signin input[id="password"], input[id="confirmPassword"] {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
