@@ -8,19 +8,35 @@
 </head>
 <body>
 <div class="container text-center">
-    <form class="form-signin" th:fragment="login (path, btnValue, isRegisterForm)" th:action="${path}" method="post">
+    <!--/*@thymesVar id="user" type="com.gusev.spring5quizapp.model.User"*/-->
+    <form class="form-signin" th:fragment="login (user, path, btnValue, isRegisterForm)" th:object="${user}"
+          th:action="${path}" method="post">
         <h1 class="h3 mb-3 font-weight-normal">Please <span th:text="${btnValue}"></span></h1>
         <div th:if="${isRegisterForm}">
             <label for="email" class="sr-only">Email</label>
-            <input type="email" id="email" class="form-control" name="email" placeholder="Email" required autofocus>
+            <input type="email" id="email" class="form-control" placeholder="Email" required name="email"
+                   th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'" th:field="*{email}" autofocus>
+            <div class="invalid-feedback" th:errors="*{email}">
+            </div>
         </div>
-        <label for="username" class="sr-only">Username</label>
-        <input type="text" id="username" name="username" class="form-control" th:classappend="${isRegisterForm} ? 'rounded-0'" placeholder="Username" required autofocus>
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" class="form-control" th:classappend="${isRegisterForm} ? 'rounded-0'" placeholder="Password" required>
+
+        <div><label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required
+                   th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'" autofocus>
+            <div class="invalid-feedback" th:errors="*{username}">
+            </div>
+        </div>
+        <div><label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control"
+                   th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'"
+                   placeholder="Password" required>
+<!--               th:classappend="${isRegisterForm} ? 'rounded-0'"-->
+            <div class="invalid-feedback mb-1" th:errors="*{password}">
+            </div>
+        </div>
         <div th:if="${isRegisterForm}">
-            <label for="confirmPassword" class="sr-only">Confirm password</label>
-            <input type="password" id="confirmPassword" class="form-control mb-3 mt-n1" name="confirmPassword"
+            <label for="passwordConfirmation" class="sr-only">Confirm password</label>
+            <input type="password" id="passwordConfirmation" class="form-control mb mt-n1" name="passwordConfirmation"
                    placeholder="Confirm Password" required>
         </div>
         <div th:unless="${isRegisterForm}" class="checkbox mb-3">

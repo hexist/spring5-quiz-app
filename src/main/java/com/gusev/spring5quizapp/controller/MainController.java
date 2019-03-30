@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 public class MainController {
@@ -52,12 +55,17 @@ public class MainController {
     @PostMapping("/quizAdd")
     public String add(
             @AuthenticationPrincipal User user,
-            @ModelAttribute Quiz quiz,
+            @Valid @ModelAttribute Quiz quiz,
+            BindingResult bindingResult,
             Model model
     ) {
-        Quiz newQuiz = new Quiz(quiz.getName(), quiz.getText(), quiz.getTag(), user);
+        quiz.setAuthor(user);
 
-        quizRepository.save(newQuiz);
+        if (bindingResult.hasErrors()) {
+            return "quizAdd";
+        }
+
+        quizRepository.save(quiz);
 
         Iterable<Quiz> quizzes = quizRepository.findAll();
 

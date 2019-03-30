@@ -8,7 +8,10 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" th:field="*{name}" th:placeholder="Name"/>
+                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'"
+                       id="name" th:field="*{name}" th:placeholder="Name"/>
+                <div class="invalid-feedback" th:errors="*{name}">
+                </div>
             </div>
             <div class="form-group col-md-2">
                 <label for="tag">Tag</label>
@@ -17,8 +20,10 @@
         </div>
         <div class="form-group p-0 col-md-8">
             <label for="description">Description</label>
-            <textarea class="form-control" id="description" th:field="*{text}" rows="3"
-                      th:placeholder="Description"></textarea>
+            <textarea class="form-control" id="description" th:classappend="${#fields.hasErrors('text')} ? 'is-invalid'"
+                      th:field="*{text}" rows="3" th:placeholder="Description"></textarea>
+            <div class="invalid-feedback" th:errors="*{text}">
+            </div>
         </div>
         <button type="submit" class="btn btn-dark">Add</button>
         <button type="reset" class="btn btn-outline-dark">Reset</button>

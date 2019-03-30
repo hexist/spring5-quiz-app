@@ -3,10 +3,10 @@
 <head th:replace="fragments/common :: head ('Вход')"></head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<div th:if="${message}!=null" th:text="${message}"></div>
+<div th:if="${message}!=null" th:class="|alert alert-${messageType}|" th:text="${message}"></div>
 <div class="container mt-5">
     <div class sec:authorize="!isAuthenticated()"
-         th:replace="fragments/login :: login (path = @{/login}, btnValue = 'Sign In', isRegisterForm = false)"></div>
+         th:replace="fragments/login :: login (user = ${user}, path = @{/login}, btnValue = 'Sign In', isRegisterForm = false)"></div>
 </div>
 <footer th:replace="fragments/common :: footer"></footer>
 </body>

@@ -4,8 +4,7 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <div class="container mt-5">
-    <div th:text="${message}">1</div>
-    <div th:replace="fragments/login :: login (path = @{/registration}, btnValue = 'Sign Up', isRegisterForm = true)"></div>
+    <div th:replace="fragments/login :: login (user = ${user}, path = @{/registration}, btnValue = 'Sign Up', isRegisterForm = true)"></div>
 </div>
 <footer th:replace="fragments/common :: footer"></footer>
 </body>

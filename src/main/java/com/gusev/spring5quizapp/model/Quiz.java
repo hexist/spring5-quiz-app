@@ -2,8 +2,10 @@ package com.gusev.spring5quizapp.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -13,7 +15,10 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Name of Quiz can''t be empty!")
     private String name;
+    @NotBlank(message = "Description can''t be empty!")
+    @Length(max = 2048, message = "Too long description!")
     private String text;
     private String tag;
 
@@ -31,7 +36,7 @@ public class Quiz {
         this.author = author;
     }
 
-    public String getAuthorName(){
+    public String getAuthorName() {
         return author != null ? author.getUsername() : "No author";
     }
 }
