@@ -30,14 +30,23 @@
             <input type="password" id="password" name="password" class="form-control"
                    th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'"
                    placeholder="Password" required>
-<!--               th:classappend="${isRegisterForm} ? 'rounded-0'"-->
+            <!--               th:classappend="${isRegisterForm} ? 'rounded-0'"-->
             <div class="invalid-feedback mb-1" th:errors="*{password}">
             </div>
         </div>
         <div th:if="${isRegisterForm}">
-            <label for="passwordConfirmation" class="sr-only">Confirm password</label>
-            <input type="password" id="passwordConfirmation" class="form-control mb mt-n1" name="passwordConfirmation"
-                   placeholder="Confirm Password" required>
+            <div>
+                <label for="passwordConfirmation" class="sr-only">Confirm password</label>
+                <input type="password" id="passwordConfirmation" class="form-control mb mt-n1"
+                       name="passwordConfirmation"
+                       placeholder="Confirm Password" required>
+            </div>
+            <div>
+                <div class="g-recaptcha" data-sitekey="6LcvR5sUAAAAANszKHV9GNLPlw-gj6tv4MIS9eoI"></div>
+                <div th:if="${captchaError}" th:class="|alert alert-danger|"
+                     th:text="${captchaError}">
+                </div>
+            </div>
         </div>
         <div th:unless="${isRegisterForm}" class="checkbox mb-3">
             <label>

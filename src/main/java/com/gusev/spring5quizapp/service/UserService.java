@@ -30,7 +30,13 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("No such user: " + username);
+        }
+
+        return user;
     }
 
     public boolean addUser(User user) {
@@ -40,7 +46,7 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
-        user.setActive(true);
+        user.setActive(false);
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -71,6 +77,7 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
+        user.setActive(true);
         user.setActivationCode(null);
         userRepository.save(user);
 
