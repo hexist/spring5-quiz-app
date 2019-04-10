@@ -7,17 +7,24 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
     <!-- Custom styles for this template -->
-    <link href="../../static/login.css" rel="stylesheet" />
+    <link href="../../static/login.css" rel="stylesheet"/>
+    <link href="../../static/cards.css" rel="stylesheet"/>
 
     <title th:text="${title}">Заголовок</title>
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <body>
 <!--<div th:fragment="logoutBtn">-->
-    <!--<form th:action="@{/logout}" method="post">-->
-        <!--<input type="submit" value="Sign Out"/>-->
-    <!--</form>-->
+<!--<form th:action="@{/logout}" method="post">-->
+<!--<input type="submit" value="Sign Out"/>-->
+<!--</form>-->
 <!--</div>-->
 <footer th:fragment="footer">
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -29,6 +36,9 @@
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js"
+            integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ"
             crossorigin="anonymous"></script>
     </head>
 </footer>

@@ -14,8 +14,11 @@
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link" href="/user/profile/edit">Edit Profile</a>
             </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link" th:href="@{|/user-quizzes/${#authentication.principal.id}|}">My quizzes</a>
+            </li>
             <li class="nav-item" th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
-                <a class="nav-link" href="/user">Users</a>
+                <a class="nav-link text-warning" href="/user">Users ACL</a>
             </li>
         </ul>
     </div>

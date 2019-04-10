@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head ('My quizzes')"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container mt-5">
+    <div th:if="${quizzes}">
+        <h3 class="text-center">
+            Quizzes by user: <span class="text-warning" th:if="${user}" th:text="${user.username}"></span>
+        </h3>
+        <div th:replace="fragments/quizList :: quizList (${quizzes})"></div>
+    </div>
+    <div th:unless="${quizzes}">
+        <h3 class="text-center">
+            This user hasn't created any quizzes yet.
+        </h3>
+    </div>
+</div>
+<footer th:replace="fragments/common :: footer"></footer>
+</body>
+</html>

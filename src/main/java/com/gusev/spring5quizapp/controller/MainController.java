@@ -7,13 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.validation.Valid;
 
 @Controller
 public class MainController {
@@ -45,37 +41,8 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/quizAdd")
-    public String index(Model model) {
-        model.addAttribute("quiz", new Quiz());
-
-        return "quizAdd";
-    }
-
-    @PostMapping("/quizAdd")
-    public String add(
-            @AuthenticationPrincipal User user,
-            @Valid @ModelAttribute Quiz quiz,
-            BindingResult bindingResult,
-            Model model
-    ) {
-        quiz.setAuthor(user);
-
-        if (bindingResult.hasErrors()) {
-            return "quizAdd";
-        }
-
-        quizRepository.save(quiz);
-
-        Iterable<Quiz> quizzes = quizRepository.findAll();
-
-        model.addAttribute("quizzes", quizzes);
-
-        return "redirect:/index";
-    }
-
     @PostMapping("index/delete")
-    public String delete(@RequestParam Integer id, Model model) {
+    public String delete(@RequestParam Long id, Model model) {
         quizRepository.deleteById(id);
         Iterable<Quiz> quizzes = quizRepository.findAll();
 

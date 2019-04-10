@@ -9,38 +9,8 @@
         <button class="btn btn-outline-dark ml-2" type="submit">Search</button>
         <a class="btn btn-dark ml-2 " th:href="@{/quizAdd}" role="button">Add new quiz</a>
     </form>
-    <div th:if="${quizzes}">Список тестов:</div>
-    <div class="card-columns">
-        <div th:each="quiz : ${quizzes}" class="card my-3">
-            <div class="card-header pl-3 py-1">
-                <h6 th:text="${quiz.tag}" class=" badge badge-dark">Tag</h6>
-                <form th:action="@{/index/delete}" method="post" class="float-right">
-                    <input type="hidden" th:name="id" th:value="${quiz.id}"/>
-                    <button type="submit" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </form>
-            </div>
-            <div class="card-body">
-                <h5 th:text="${quiz.name}" class="card-title">Quiz name</h5>
-                <p class="card-text" th:text="${quiz.text}"></p>
-                <p class="card-text">
-                    <small class="text-muted" th:text="|Author: ${quiz.authorName}|">Author</small>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!--<div class="card" style="width: 18rem;">-->
-    <!--<div class="card-body">-->
-    <!--<h5 class="card-title">Card title</h5>-->
-    <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
-    <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's-->
-    <!--content.</p>-->
-    <!--<a href="#" class="card-link">Card link</a>-->
-    <!--<a href="#" class="card-link">Another link</a>-->
-    <!--</div>-->
-    <!--</div>-->
+    <div th:if="${quizzes}"><h3 class="text-center">Quizzes</h3></div>
+    <div th:replace="fragments/quizList :: quizList (${quizzes})"></div>
 </div>
 <footer th:replace="fragments/common :: footer"></footer>
 </body>

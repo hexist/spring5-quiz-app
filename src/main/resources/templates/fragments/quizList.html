@@ -1,0 +1,32 @@
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="quizList (quizzes)">
+    <div class="card-columns">
+        <div th:each="quiz : ${quizzes}" class="card my-3">
+            <!--/*@thymesVar id="quiz" type="com.gusev.spring5quizapp.model.Quiz"*/-->
+
+            <div class="card-header pl-3 py-1">
+                <h6 class=" badge badge-dark">#<span th:text="${quiz.tag}"></span></h6>
+                <form th:action="@{/index/delete}" method="post" class="float-right">
+                    <input type="hidden" th:name="id" th:value="${quiz.id}"/>
+                    <button type="submit" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </form>
+                <a class="custom-link float-right"
+                   th:if="${quiz.author.id} == ${#authentication.principal.id}"
+                   th:href="@{/quizEdit(quiz=__${quiz.id}__)}"><i class="fas fa-edit mr-1" data-fa-transform="grow-2 down-2"></i>
+                </a>
+            </div>
+            <div class="card-body">
+                <h5 th:text="${quiz.name}" class="card-title">Quiz name</h5>
+                <p class="card-text" th:text="${quiz.text}"></p>
+            </div>
+                <div class="card-footer">
+                    <small class="text-muted" th:text="|Author: |"></small>
+                    <a th:href="@{/user-quizzes/__${quiz.author.id}__}" th:text="${quiz.authorName}"></a>
+                    <a th:href="@{/}" class="btn btn-secondary float-right btn-sm mb-2">Open Quiz</a>
+                </div>
+        </div>
+    </div>
+</div>
+</html>
