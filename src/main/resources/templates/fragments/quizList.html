@@ -24,7 +24,7 @@
                 <div class="card-footer">
                     <small class="text-muted" th:text="|Author: |"></small>
                     <a th:href="@{/user-quizzes/__${quiz.author.id}__}" th:text="${quiz.authorName}"></a>
-                    <a th:href="@{/}" class="btn btn-secondary float-right btn-sm mb-2">Open Quiz</a>
+                    <a th:href="@{/quizDetails/__${quiz.id}__}" class="btn btn-secondary float-right btn-sm mb-2">Open Quiz</a>
                 </div>
         </div>
     </div>

@@ -1,7 +1,9 @@
 package com.gusev.spring5quizapp.controller;
 
+import com.gusev.spring5quizapp.model.Question;
 import com.gusev.spring5quizapp.model.Quiz;
 import com.gusev.spring5quizapp.model.User;
+import com.gusev.spring5quizapp.repository.QuestionRepository;
 import com.gusev.spring5quizapp.repository.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,19 +13,36 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
 public class QuizConroller {
     @Autowired
     private QuizRepository quizRepository;
+    @Autowired
+    private QuestionRepository questionRepository;
 
     @GetMapping("/quizAdd")
     public String quizAdd(
             Model model) {
         model.addAttribute("quiz", new Quiz());
+        model.addAttribute("questions", new HashSet<Question>());
 
         return "quizAdd";
+    }
+
+    @GetMapping("/quizDetails/{quiz}")
+    public String quizDetails(
+            @PathVariable Quiz quiz,
+            Model model) {
+        List<Question> questions = questionRepository.findByQuizId(quiz.getId());
+        model.addAttribute("question", new Question());
+        model.addAttribute("quiz", quiz);
+        model.addAttribute("questions", questions);
+
+        return "quizDetails";
     }
 
     @GetMapping("/quizEdit")
@@ -60,6 +79,25 @@ public class QuizConroller {
         model.addAttribute("quizzes", quizzes);
 
         return "redirect:/index";
+    }
+
+
+    @PostMapping("/questionAdd")
+    public String questionAdd(
+            @RequestParam Quiz quiz,
+            @ModelAttribute Question question,
+            Model model
+    ) {
+        question.setQuiz(quiz);
+
+        questionRepository.save(question);
+
+        List<Question> questions = questionRepository.findByQuizId(quiz.getId());
+
+        model.addAttribute("quiz", quiz);
+        model.addAttribute("questions", questions);
+
+        return "redirect:/quizDetails/" + quiz.getId();
     }
 
     @GetMapping("/user-quizzes/{user}")

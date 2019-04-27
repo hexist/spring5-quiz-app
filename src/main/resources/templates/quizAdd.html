@@ -4,7 +4,7 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <div class="container mt-5">
-    <form action="#" th:action="@{/quizSave}" th:object="${quiz}" method="post">
+    <form th:action="@{/quizSave}" th:object="${quiz}" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Name</label>
